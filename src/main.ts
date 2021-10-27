@@ -33,9 +33,8 @@ async function run() {
   });
 
   if(r && r.data && r.data.parent) {
-    console.log(r.data.parent)
-    owner = r.data.parent.owner || owner
-    repo = r.data.parent.repo || repo
+    owner = r.data.parent.owner.login || owner
+    repo = r.data.parent.name || repo
   }
 
   try {
