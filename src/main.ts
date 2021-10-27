@@ -14,8 +14,8 @@ async function run() {
   const mergeMethod = core.getInput('merge_method', { required: false });
   const prTitle = core.getInput('pr_title', { required: false });
   const prMessage = core.getInput('pr_message', { required: false });
-  const ignoreFail = core.getInput('ignore_fail', { required: false });
-  const autoApprove = core.getInput('auto_approve', { required: false });
+  const ignoreFail = core.getBooleanInput('ignore_fail', { required: false });
+  const autoApprove = core.getBooleanInput('auto_approve', { required: false });
   const retries = parseInt(core.getInput('retries', { required: false })) || 4;
   const retryAfter = parseInt(core.getInput('retry_after', { required: false })) || 60;
   
