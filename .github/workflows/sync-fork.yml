@@ -12,6 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: HalleyAssist/actions-fork-sync@v1.5.1
+      - uses: HalleyAssist/actions-fork-sync@v1.5.2
         with:
           retry_after: 1
