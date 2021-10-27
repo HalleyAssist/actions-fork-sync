@@ -7,7 +7,7 @@ const context = Github.context;
 const MyOctokit = Octokit.plugin(retry);
 
 async function run() {
-  const owner = core.getInput('owner', { required: false }) || context.repo.owner;
+  let owner = core.getInput('owner', { required: false }) || context.repo.owner;
   const base = core.getInput('base', { required: false });
   const head = core.getInput('head', { required: false });
   const mergeMethod = core.getInput('merge_method', { required: false });
@@ -25,6 +25,15 @@ async function run() {
       retryAfter,
     },
   });
+
+  let r = await octokit.rest.repos.get({
+    owner,
+    repo: context.repo.repo,
+  });
+
+  if(r && r.parent) {
+    owner = r.parent.owner || owner
+  }
 
   try {
     let pr = await octokit.pulls.create({ owner: context.repo.owner, repo: context.repo.repo, title: prTitle, head: owner + ':' + head, base: base, body: prMessage, maintainer_can_modify: false });
