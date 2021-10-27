@@ -27,18 +27,15 @@ async function run() {
     },
   });
 
-  console.log("AAAA")
-
   let r = await octokit.rest.repos.get({
     owner,
     repo,
   });
 
-  console.log({r})
-
-  if(r && r.parent) {
-    owner = r.parent.owner || owner
-    repo = r.parent.repo || repo
+  if(r && r.data && r.data.parent) {
+    console.log(r.data.parent)
+    owner = r.data.parent.owner || owner
+    repo = r.data.parent.repo || repo
   }
 
   try {
